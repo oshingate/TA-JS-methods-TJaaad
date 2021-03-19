@@ -13,14 +13,24 @@ let words = [
 //word from the array. (Use above array "words" to test it). If there are 2 with the same length,
 //it should return the first occurrence.
 let findLongestWord = (arr) => {
-  let longestWord = "";
-  for (let i of arr) {
-    if (i.length > longestWord.length) {
-      longestWord = i;
+  let arrOfLength = words.map(function (val) {
+    return val.length;
+  });
+  let largestWord = 0;
+  arrOfLength.forEach(function (val) {
+    if (largestWord < val) {
+      largestWord = val;
     }
-  }
-  return longestWord;
+  });
+  console.log(
+    `largest word is ${
+      words[arrOfLength.indexOf(largestWord)]
+    } of length ${largestWord} and index of it is ${arrOfLength.indexOf(
+      largestWord
+    )}`
+  );
 };
+
 findLongestWord(words);
 // - Convert the above array "words" into an array of length of word instead of word.
 
@@ -30,7 +40,16 @@ let arrOfLength = words.map(function (val) {
 console.log(arrOfLength);
 
 // - Create a new array that only contains word with atleast one vowel.
-
+let checkVowel = (val) => {
+  return (
+    val.includes("a") ||
+    val.includes("e") ||
+    val.includes("i") ||
+    val.includes("o") ||
+    val.includes("u")
+  );
+};
+console.log(words.filter(checkVowel));
 // - Find the index of the word "rhythm"
 
 console.log(words.indexOf("rhythm"));
