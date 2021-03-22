@@ -204,6 +204,12 @@ let pipeline = [
   half,
   increment,
 ];
+console.log(
+  pipeline.reduce(function (acc, cv) {
+    acc = cv(acc);
+    return acc;
+  }, 3)
+);
 
 /*
 Using the pipeline variable that contains the collection of functions, taking the initial value 3 find the output.
@@ -218,14 +224,6 @@ EXAMPLE:
 
   ...
 */
-let pipeline21 = (val) => {
-  let increment = (val) => (val += 1);
-  let double = (val) => (val *= 2);
-  let decrement = (val) => (val -= 1);
-  let triple = (val) => (val *= 3);
-  let half = (val) => (val /= 2);
-  return val;
-};
 
 let pipeline2 = [
   increment,
@@ -242,4 +240,9 @@ let pipeline2 = [
 ];
 
 // Find the output using pipeline2 the initial value if 8
-console.log(pipeline21(3));
+console.log(
+  pipeline2.reduce(function (acc, cv) {
+    acc = cv(acc);
+    return acc;
+  }, 8)
+);
