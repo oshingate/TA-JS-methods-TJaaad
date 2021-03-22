@@ -13,7 +13,7 @@ function peopleByHouses() {
   // your code goes here
   let peopleList = [];
   got.houses.forEach(function (val) {
-    peopleList.push([val.name, val.people.length]);
+    peopleList[val.name] = val.people.length;
   });
   return peopleList;
 }
@@ -21,88 +21,61 @@ function peopleByHouses() {
 function everyone() {
   // your code goes here
   let allpeople = [];
-  got.houses.forEach(function (val) {
-    val.people.forEach(function (val2) {
-      allpeople.push(val2.name);
+  got.houses.forEach((house) => {
+    let peopleName = house.people.map((person) => {
+      return person.name;
     });
+    allpeople = allpeople.concat(peopleName);
   });
+
   return allpeople;
 }
 
 function nameWithS() {
   // your code goes here
-  let allpeople = [];
-  got.houses.forEach(function (val) {
-    val.people.forEach(function (val2) {
-      allpeople.push(val2.name);
-    });
+  let allpeople = everyone();
+
+  return allpeople.filter((name) => {
+    return name.toLowerCase().includes("s");
   });
-  let peopleWithS = [];
-  allpeople.forEach(function (val) {
-    val2 = val.toLowerCase();
-    if (val2.includes("s") === true) {
-      peopleWithS.push(val);
-    }
-  });
-  return peopleWithS;
 }
 
 function nameWithA() {
   // your code goes here
-  let allpeople = [];
-  got.houses.forEach(function (val) {
-    val.people.forEach(function (val2) {
-      allpeople.push(val2.name);
-    });
+  let allpeople = everyone();
+
+  return allpeople.filter((name) => {
+    return name.toLowerCase().includes("a");
   });
-  let peopleWithA = [];
-  allpeople.forEach(function (val) {
-    val2 = val.toLowerCase();
-    if (val2.includes("a") === true) {
-      peopleWithA.push(val);
-    }
-  });
-  return peopleWithA;
 }
 
 function surnameWithS() {
   // your code goes here
-  let surnameWithS = [];
-  got.houses.forEach(function (val) {
-    if (val.name.charAt(0) === "S") {
-      val.people.forEach(function (val2) {
-        surnameWithS.push(val2.name);
-      });
-    }
+  let allpeople = everyone();
+
+  return allpeople.filter((name) => {
+    return name.split(" ")[1].toLowerCase().startsWith("s");
   });
-  return surnameWithS;
 }
 
 function surnameWithA() {
   // your code goes here
-  let surnameWithA = [];
-  got.houses.forEach(function (val) {
-    if (val.name.charAt(0) === "A") {
-      val.people.forEach(function (val2) {
-        surnameWithA.push(val2.name);
-      });
-    }
+  let allpeople = everyone();
+
+  return allpeople.filter((name) => {
+    return name.split(" ")[1].toLowerCase().startsWith("a");
   });
-  return surnameWithA;
 }
 
 function peopleNameOfAllHouses() {
   // your code goes here
-  let allpeopleSorted = [];
-  got.houses.forEach(function (val) {
-    let peopleOfHouse = [];
-    val.people.forEach(function (val2) {
-      peopleOfHouse.push(val2.name);
+  let final = [];
+  got.houses.forEach((house) => {
+    final[house.name] = house.people.map((person) => {
+      return person.name;
     });
-    allpeopleSorted.push(`${val.name}: [${peopleOfHouse}]`);
   });
-
-  return allpeopleSorted;
+  return final;
 }
 
 // Testing your result after writing your function
